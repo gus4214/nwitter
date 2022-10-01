@@ -4,8 +4,7 @@ import { BrowserRouter, Routes, Route } from "react-router-dom";
 import Home from "../routes/Home";
 import Auth from "../routes/Auth";
 
-const Routers = () => {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
+const Routers = ({ isLoggedIn }) => {
   return (
     <BrowserRouter>
       <Routes>

@@ -1,5 +1,10 @@
 import { dbService } from "fbase";
-import { getStorage, ref, uploadString } from "firebase/storage";
+import {
+  getStorage,
+  ref,
+  uploadString,
+  getDownloadURL,
+} from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import React, { useState, useEffect, useRef } from "react";
 import {
@@ -14,7 +19,7 @@ import Nweet from "components/Nweet";
 const Home = ({ userObj }) => {
   const [nweet, setNweet] = useState("");
   const [nweets, setNweets] = useState([]);
-  const [attachment, setAttachment] = useState();
+  const [attachment, setAttachment] = useState("");
 
   useEffect(() => {
     const q = query(
@@ -33,21 +38,30 @@ const Home = ({ userObj }) => {
   const onSubmit = async (e) => {
     e.preventDefault();
     const storage = getStorage();
-    const fileRef = ref(storage, `${userObj.uid}/${uuidv4()}`);
-    const response = await uploadString(fileRef, attachment, "data_url");
-    console.log(response);
-    // try {
-    //   const docRef = await addDoc(collection(dbService, "nweets"), {
-    //     text: nweet,
-    //     createdAt: Date.now(),
-    //     creatorId: userObj.uid,
-    //   });
-    //   console.log("Document written with ID: ", docRef.id);
-    // } catch (error) {
-    //   console.error("Error adding document: ", error);
-    // }
+    let attachmentUrl = "";
+    // 이미지 없이 텍스트만 올릴 때도 있어야 하기 때문에 attachment가 있을 때만 1f문 실행
+    // 이미지를 첨부하지 않을 때는 attachmentUrl=''
+    if (attachment != "") {
+      const attachmentRef = ref(storage, `${userObj.uid}/${uuidv4()}`); // 파일 경로 참조 만들기
+      // storage 참조 경로로 파일 업로드 하기
+      const response = await uploadString(
+        attachmentRef,
+        attachment,
+        "data_url"
+      );
+      attachmentUrl = await getDownloadURL(response.ref); // storage 참조 경로에 있는 파일의 URL을 다운로드해서 attachmentUrl 변수에 넣어 업데이트 한다.
+    }
+    // 느윗 오브젝트
+    const nweetObj = {
+      text: nweet,
+      createdAt: Date.now(),
+      creatorId: userObj.uid,
+      attachmentUrl,
+    };
 
-    // setNweet("");
+    await addDoc(collection(dbService, "nweets"), nweetObj); // 느윗 누르면 nweetObj 형태의 새로운 document를 생성하여 nweets 콜렉션에 넣는다.
+    setNweet(""); // form 비우기
+    setAttachment(""); // 파일 미리보기 img src 비워주기
   };
 
   const onChange = (e) => {
@@ -69,7 +83,7 @@ const Home = ({ userObj }) => {
   const fileInput = useRef();
 
   const onClearAttachment = () => {
-    setAttachment(null);
+    setAttachment("");
     fileInput.current.value = null;
   };
 

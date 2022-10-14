@@ -1,10 +1,5 @@
-import { dbService } from "fbase";
-import {
-  getStorage,
-  ref,
-  uploadString,
-  getDownloadURL,
-} from "firebase/storage";
+import { dbService, storageService } from "fbase";
+import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { v4 as uuidv4 } from "uuid";
 import React, { useState, useEffect, useRef } from "react";
 import {
@@ -37,12 +32,11 @@ const Home = ({ userObj }) => {
 
   const onSubmit = async (e) => {
     e.preventDefault();
-    const storage = getStorage();
     let attachmentUrl = "";
     // 이미지 없이 텍스트만 올릴 때도 있어야 하기 때문에 attachment가 있을 때만 1f문 실행
     // 이미지를 첨부하지 않을 때는 attachmentUrl=''
-    if (attachment != "") {
-      const attachmentRef = ref(storage, `${userObj.uid}/${uuidv4()}`); // 파일 경로 참조 만들기
+    if (attachment !== "") {
+      const attachmentRef = ref(storageService, `${userObj.uid}/${uuidv4()}`); // 파일 경로 참조 만들기
       // storage 참조 경로로 파일 업로드 하기
       const response = await uploadString(
         attachmentRef,

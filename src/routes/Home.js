@@ -100,12 +100,7 @@ const Home = ({ userObj }) => {
         <input type="submit" value="Nweet" />
         {attachment && (
           <div>
-            <img
-              src={attachment}
-              alt={"myImage"}
-              width="50px"
-              height={"50px"}
-            />
+            <img src={attachment} alt={"myImage"} width="50px" height="50px" />
             <button onClick={onClearAttachment}>Clear</button>
           </div>
         )}

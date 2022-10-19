@@ -9,7 +9,7 @@ import Auth from "routes/Auth";
 const Routers = ({ isLoggedIn, userObj }) => {
   return (
     <BrowserRouter>
-      {isLoggedIn && <Navigation />}
+      {isLoggedIn && <Navigation userObj={userObj} />}
       <Routes>
         {isLoggedIn ? (
           <>

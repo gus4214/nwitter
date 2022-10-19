@@ -4,7 +4,7 @@ import { auth, dbService } from "fbase";
 import { updateProfile } from "firebase/auth";
 import { collection, getDocs, query, where, orderBy } from "firebase/firestore";
 
-const Profile = ({ userObj }) => {
+const Profile = ({ userObj, refreshUser }) => {
   const navigate = useNavigate();
   const onLogOutClick = () => {
     auth.signOut();
@@ -45,6 +45,7 @@ const Profile = ({ userObj }) => {
         displayName: newDisplayName,
       });
     }
+    refreshUser();
   };
 
   return (

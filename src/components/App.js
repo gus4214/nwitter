@@ -19,10 +19,16 @@ function App() {
     });
   }, []);
 
+  const refreshUser = () => setUserObj({ ...auth.currentUser });
+
   return (
     <>
       {init ? (
-        <Routers isLoggedIn={isLoggedIn} userObj={userObj} />
+        <Routers
+          isLoggedIn={isLoggedIn}
+          userObj={userObj}
+          refreshUser={refreshUser}
+        />
       ) : (
         "Initialinzing..."
       )}

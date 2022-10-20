@@ -12,15 +12,11 @@ const Profile = ({ userObj, refreshUser }) => {
   };
 
   const getMyNweets = async () => {
-    // dbService의 컬렉션 중 "nweets" Docs에서 userObj의 uid와 동일한
-    // creatorID를 가진 모든 문서를 내림차순으로 가져오는 쿼리(요청) 생성
     const q = query(
       collection(dbService, "nweets"),
       where("creatorId", "==", userObj.uid),
       orderBy("createdAt", "desc")
     );
-
-    // getDocs()메서드로 쿼리 결과 값 가져오기
     const querySnapshot = await getDocs(q);
     querySnapshot.forEach((doc) => {
       console.log(doc.id, "=>", doc.data());
@@ -49,18 +45,29 @@ const Profile = ({ userObj, refreshUser }) => {
   };
 
   return (
-    <>
-      <form onSubmit={onSubmit}>
+    <div className="container">
+      <form onSubmit={onSubmit} className="profileForm">
         <input
+          className="formInput"
           type="text"
+          autoFocus
           placeholder="Display name"
           onChange={onChange}
           value={newDisplayName}
         />
-        <input type="submit" value="Update Profile" />
+        <input
+          type="submit"
+          value="Update Profile"
+          className="formBtn"
+          style={{
+            marginTop: 10,
+          }}
+        />
       </form>
-      <button onClick={onLogOutClick}>Log Out</button>
-    </>
+      <span className="formBtn cancelBtn logOut" onClick={onLogOutClick}>
+        Log Out
+      </span>
+    </div>
   );
 };
 

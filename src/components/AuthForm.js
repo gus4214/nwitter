@@ -4,6 +4,7 @@ import {
   getAuth,
   signInWithEmailAndPassword,
 } from "firebase/auth";
+import "components/AuthForm.scss";
 
 const AuthForm = () => {
   const [newAccount, setNewAccount] = useState(true);
@@ -39,7 +40,7 @@ const AuthForm = () => {
 
   return (
     <>
-      <form onSubmit={onSubmit} className="container">
+      <form onSubmit={onSubmit} className="authFormContainer">
         <input
           name="email"
           type="text"

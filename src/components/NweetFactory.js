@@ -5,6 +5,7 @@ import { collection, addDoc } from "firebase/firestore";
 import { ref, uploadString, getDownloadURL } from "firebase/storage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faPlus, faTimes } from "@fortawesome/free-solid-svg-icons";
+import "components/NweetFactory.scss";
 
 const NweetFactory = ({ userObj }) => {
   const [nweet, setNweet] = useState("");

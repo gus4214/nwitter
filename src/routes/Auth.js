@@ -12,6 +12,7 @@ import {
   faGoogle,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
+import "routes/Auth.scss";
 
 const Auth = () => {
   const onSocialClick = async (e) => {
@@ -30,7 +31,7 @@ const Auth = () => {
     <div className="authContainer">
       <FontAwesomeIcon
         icon={faTwitter}
-        color={"#04AAFF"}
+        color={"#28b5f4"}
         size="3x"
         style={{ marginBottom: 30 }}
       />

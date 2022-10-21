@@ -1,0 +1,53 @@
+@import "styles/variables";
+
+.profileContainer {
+  @include container;
+  margin-top: 50px;
+
+  .profileForm {
+    border-bottom: 1px solid rgba(255, 255, 255, 0.9);
+    padding-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+
+    .profileForm_profilePhoto {
+      @include attachmentImage;
+      margin-bottom: 10px;
+    }
+
+    .profileFrom_profileName {
+      margin-bottom: 10px;
+    }
+
+    .formInput {
+      @include formInput;
+      border-color: white;
+    }
+
+    .profileInput__label {
+      @include addPhotoLabel;
+      text-align: center;
+      margin-top: 10px;
+    }
+
+    .formBtn {
+      @include formBtn;
+    }
+
+    .profileForm__attachment {
+      @include attachmentImage;
+
+      .profileForm__clear {
+        @include attachmentClear;
+      }
+    }
+  }
+
+  .logOut {
+    @include formBtn;
+    @include cancleBtn;
+    margin-top: 50px;
+  }
+}

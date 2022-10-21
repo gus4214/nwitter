@@ -3,6 +3,7 @@ import React, { useState, useEffect } from "react";
 import { collection, query, orderBy, onSnapshot } from "firebase/firestore";
 import Nweet from "components/Nweet";
 import NweetFactory from "components/NweetFactory";
+import "routes/Home.scss";
 
 const Home = ({ userObj }) => {
   const [nweets, setNweets] = useState([]);
@@ -22,7 +23,7 @@ const Home = ({ userObj }) => {
   }, []);
 
   return (
-    <div className="container">
+    <div className="nweetContainer">
       <NweetFactory userObj={userObj} />
       <div style={{ marginTop: 30 }}>
         {nweets.map((nweet) => (

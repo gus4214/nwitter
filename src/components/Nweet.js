@@ -5,6 +5,7 @@ import { refFromURL } from "firebase/database";
 import { ref, deleteObject } from "firebase/storage";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faTrash, faPencilAlt } from "@fortawesome/free-solid-svg-icons";
+import "components/Nweet.scss";
 
 const Nweet = ({ nweetObj, isOwner }) => {
   const [editing, setEditing] = useState(false);
@@ -38,7 +39,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
     <div className="nweet">
       {editing ? (
         <>
-          <form onSubmit={onSubmit} className="container">
+          <form onSubmit={onSubmit} className="editContainer">
             <input
               className="formInput"
               type="text"
@@ -48,11 +49,7 @@ const Nweet = ({ nweetObj, isOwner }) => {
               autoFocus
               onChange={onChange}
             />
-            <input
-              className="formBtn"
-              type="submit"
-              value="Update Nweet"
-            ></input>
+            <input className="formBtn" type="submit" value="Update Nweet" />
           </form>
           <span onClick={toggleEditing} className="formBtn cancelBtn">
             Cancel

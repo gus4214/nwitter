@@ -1,0 +1,6 @@
+@import "styles/variables.scss";
+
+.nweetContainer {
+  @include container;
+  margin-top: 80px;
+}

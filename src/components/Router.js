@@ -8,7 +8,7 @@ import Auth from "routes/Auth";
 
 const Routers = ({ isLoggedIn, userObj, refreshUser }) => {
   return (
-    <BrowserRouter>
+    <BrowserRouter basename={process.env.PUBLIC_URL}>
       {isLoggedIn && <Navigation userObj={userObj} />}
       <div
         style={{
